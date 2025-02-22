@@ -7,3 +7,4 @@
     - 02_checkmk_verify
     - 03_checkmk_install
     - 04_checkmk_create_instance
+#    - 05_checkmk_config

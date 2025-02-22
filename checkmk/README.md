@@ -57,6 +57,28 @@ Execute the playbook to install Checkmk:
 ansible-playbook -i inventory playbook.yml
 ```
 
+### Optional **configure Instance to Monitore Clients**
+
+delete # in **playbook.yml**
+
+```sh
+#    - 05_checkmk_config
+```
+
+add server/clients in **roles/05*checkmk_config*/files/checkmk-config.sh** like
+
+```sh
+HOSTS=(
+  "ansible.fh.at 192.168.1.101 Ansible Server"
+  "checkmk.fh.at 192.168.1.102 Checkmk Server"
+  "zammad.fh.at 192.168.1.103 Zammad Server"
+  "jenkins.fh.at 192.168.1.104 Jenkins"
+  "splunk.fh.at 192.168.1.105 SIEM"
+  "dns.fh.at 192.168.1.106 DNS"
+  "dhcp.fh.at 192.168.1.107 DHCP"
+)
+```
+
 ### 3️ **Start Checkmk Instance**
 
 After successful installation, start the instance with:
@@ -86,6 +108,10 @@ sudo omd start monitoring
 
 - Creates a new Checkmk monitoring instance using `omd create monitoring`
 - Displays a message on how to start the instance
+
+### **05_checkmk_config**
+
+- adds host to monitor in the checkmk configuration
 
 ## Extensions
 
