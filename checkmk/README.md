@@ -6,8 +6,11 @@ This Ansible project automates the installation of Checkmk, including downloadin
 
 ```
 ansible-checkmk/                # Main directory of the Ansible project
+|-- ansuble.cfg                 # Global Configuration to execute Ansible Playbooks
 │-- inventory                   # Inventory file for target hosts
 │-- playbook.yml                 # Main playbook (includes roles)
+│-- group_vars/
+│   │-- vault.yml               # Ansible Vault to store encrypted passwords
 │-- roles/                       # Folder for all roles
 │   │-- 01_checkmk_download/     # Role: Download Checkmk
 │   │   │-- tasks/
@@ -20,6 +23,11 @@ ansible-checkmk/                # Main directory of the Ansible project
 │   │   │   ├── main.yml
 │   │-- 04_checkmk_create_instance/ # Role: Create Checkmk instance
 │   │   │-- tasks/
+│   │   │   ├── main.yml
+|   |-- 05_checkmk_config/      # Role: Configure Checkmk
+|   |   │-- files/
+│   │   │   ├── checkmk-config.sh
+|   |   │-- tasks/
 │   │   │   ├── main.yml
 ```
 
