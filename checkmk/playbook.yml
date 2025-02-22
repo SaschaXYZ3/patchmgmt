@@ -1,0 +1,9 @@
+---
+- name: Install Checkmk with Verification
+  hosts: all
+  become: yes
+  roles:
+    - 01_checkmk_download
+    - 02_checkmk_verify
+    - 03_checkmk_install
+    - 04_checkmk_create_instance
