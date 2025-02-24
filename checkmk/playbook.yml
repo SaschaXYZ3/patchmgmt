@@ -1,10 +1,11 @@
 ---
 - name: Install Checkmk with Verification
-  hosts: all
+  hosts: localhost
+  remote: local
   become: yes
   roles:
     - 01_checkmk_download
     - 02_checkmk_verify
     - 03_checkmk_install
-    - 04_checkmk_create_instance
-#    - 05_checkmk_config
+    #    - 04_checkmk_create_instance
+    - 05_checkmk_config
