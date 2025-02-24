@@ -1,5 +1,6 @@
 ---
-- name: Create Checkmk monitoring site
-  checkmk.general.site:
-    name: monitoring
-    state: present
+- name: Create Checkmk instance
+  ansible.builtin.command: omd create monitoring
+  args:
+    creates: "/omd/sites/monitoring"
+  register: omd_create
