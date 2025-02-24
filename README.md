@@ -38,6 +38,21 @@ Providing a user account with sufficient privileges to install the Checkmk agent
 
 User credentials are securely stored using Ansible Vault, ensuring encrypted storage of sensitive data.
 
+### 2️ **Create Ansible encrypted Password**
+
+```sh
+ansible-vault encrypt_string 'SuperSicheresPasswort123!' --name cmkadmin_password
+New Vault password:
+Confirm New Vault password:
+Encryption successful
+```
+Save the encryption in vault file like __group_vars/vault.yml__
+
+Execute with vault
+```sh
+ansible-playbook playbook.yml --ask-vault-pass
+```
+
 ## 🚀 Getting Started
 
 Deploy Checkmk to monitor target systems.
@@ -49,3 +64,5 @@ Configure Ansible to trigger CRQ creation in Zammad.
 Approve changes via Zammad.
 
 Apply patches using Ansible after approval.
+
+

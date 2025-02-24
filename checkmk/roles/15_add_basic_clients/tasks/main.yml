@@ -1,0 +1,11 @@
+- name: Add hosts to Checkmk
+  checkmk.general.host:
+    site: monitoring
+    hostname: "{{ item.hostname }}"
+    ipaddress: "{{ item.ip }}"
+    description: "{{ item.description }}"
+    state: present
+  loop:
+    - { hostname: "server", ip: "192.168.1.245", description: "Checkmkserver" }
+   # - { hostname: "server2", ip: "192.168.1.11", description: "DB-Server" }
+   # - { hostname: "server3", ip: "192.168.1.12", description: "Proxy-Server" }
