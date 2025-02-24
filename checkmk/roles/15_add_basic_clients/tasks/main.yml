@@ -1,3 +1,4 @@
+---
 - name: Add hosts to Checkmk
   checkmk.general.host:
     site: monitoring

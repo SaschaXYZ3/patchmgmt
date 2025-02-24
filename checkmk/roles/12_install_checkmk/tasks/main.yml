@@ -1,16 +1,11 @@
-- name: Install and configure Checkmk
-  hosts: checkmk_server
-  become: true
-  collections:
-    - checkmk.general
-  tasks:
+---
+- name: Install Checkmk Raw Edition
+  ansible.builtin.apt:
+    deb: "{{ checkmk_download_url }}"
+  when: ansible_os_family == "Debian"
 
-    - name: Install Checkmk Raw Edition
-      ansible.builtin.apt:
-        deb: "https://download.checkmk.com/checkmk/2.3.0p27/check-mk-raw-2.3.0p27_0.noble_amd64.deb"
-
-    - name: Ensure Checkmk service is enabled
-      ansible.builtin.systemd:
-        name: apache2
-        enabled: true
-        state: started
+- name: Ensure Checkmk service is enabled
+  ansible.builtin.systemd:
+    name: apache2
+    enabled: true
+    state: started

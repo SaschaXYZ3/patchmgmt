@@ -1,3 +1,4 @@
+---
 - name: Create Checkmk monitoring site
   checkmk.general.site:
     name: monitoring
