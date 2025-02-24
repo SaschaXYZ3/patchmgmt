@@ -1,4 +1,3 @@
----
 - name: Install and configure Checkmk
   hosts: checkmk_server
   become: true
