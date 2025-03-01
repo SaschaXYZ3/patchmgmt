@@ -4,7 +4,7 @@
   connection: local
   become: yes
   vars_files:
-    - ./patchmgmt/checkmk/group_vars
+    - ./patchmgmt/checkmk/group_vars/site.yml
   roles:
     #- 01_checkmk_download
     #- 02_checkmk_verify
