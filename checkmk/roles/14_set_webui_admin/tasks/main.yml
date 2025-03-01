@@ -3,9 +3,12 @@
   ansible.builtin.command: cat /omd/sites/monitoring/var/check_mk/web/automation/automation.secret
   register: checkmk_api_secret
   changed_when: false
+  no_log: true  # Hide secret from logs for security
+
+- name: Store automation secret as a fact
   ansible.builtin.set_fact:
     checkmk_automation_secret: "{{ checkmk_api_secret.stdout }}"
-  no_log: true  # Hide secret from logs for security
+  no_log: true  # Prevent secret exposure in logs
 
 - name: Set Checkmk admin password
   checkmk.general.user:
