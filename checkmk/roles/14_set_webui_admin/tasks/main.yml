@@ -1,4 +1,4 @@
 ---
 - name: Set Checkmk admin password
   ansible.builtin.command: echo "{{ cmkadmin_password }}" | omd setpassword monitoring cmkadmin
-  no_log: true
+  #no_log: true
