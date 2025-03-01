@@ -7,4 +7,4 @@
 - name: Fail if checksum does not match
   fail:
     msg: "Checksum verification failed!"
-  when: checksum_result.stdout != "94a484c17e862d7ca02996064477a9f7a1c15008ba234906e0afb4081e91968a"
+  when: checksum_result.stdout != "e318c0c1d1c7b91fdc639d89a1a05d0820614a854dbc19aef7c6719e35a9905a"
