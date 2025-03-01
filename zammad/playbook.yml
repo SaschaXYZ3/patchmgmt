@@ -25,9 +25,10 @@
         state: present
 
     - name: Add Elasticsearch APT repository
-      apt_repository:
-        repo: "deb https://artifacts.elastic.co/packages/{{ elasticsearch_version }}/apt stable main"
+      ansible.builtin.apt_repository:
+        repo: "deb [trusted=yes] https://artifacts.elastic.co/packages/{{ elasticsearch_version }}/apt stable main"
         state: present
+        filename: elasticsearch
 
     - name: Install Elasticsearch
       apt:
