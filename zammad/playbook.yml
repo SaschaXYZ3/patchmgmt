@@ -1,0 +1,81 @@
+---
+- name: Install Elasticsearch and Zammad
+  hosts: localhost
+  become: true
+  vars:
+    elasticsearch_version: "8.15.0"  # Specify the desired Elasticsearch version
+    zammad_repo_url: "https://dl.packager.io/srv/deb/zammad/zammad/stable/ubuntu-24.04"  # Zammad repository URL
+  tasks:
+
+    - name: Update APT package index
+      apt:
+        update_cache: yes
+
+    - name: Install required dependencies
+      apt:
+        name:
+          - apt-transport-https
+          - openjdk-11-jdk  # Ensure Java is installed for Elasticsearch
+          - wget
+        state: present
+
+    - name: Add Elasticsearch GPG key
+      apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Add Elasticsearch APT repository
+      apt_repository:
+        repo: "deb https://artifacts.elastic.co/packages/{{ elasticsearch_version }}/apt stable main"
+        state: present
+
+    - name: Install Elasticsearch
+      apt:
+        name: elasticsearch
+        state: present
+
+    - name: Enable and start Elasticsearch service
+      systemd:
+        name: elasticsearch
+        enabled: yes
+        state: started
+
+    - name: Wait for Elasticsearch to start
+      uri:
+        url: http://localhost:9200
+        method: GET
+      register: es_status
+      until: es_status.status == 200
+      retries: 5
+      delay: 10
+
+    - name: Add Zammad GPG key
+      apt_key:
+        url: "{{ zammad_repo_url }}/gpg.key"
+        state: present
+
+    - name: Add Zammad APT repository
+      apt_repository:
+        repo: "deb {{ zammad_repo_url }} /"
+        state: present
+
+    - name: Install Zammad
+      apt:
+        name: zammad
+        state: present
+
+    - name: Enable and start Zammad service
+      systemd:
+        name: zammad
+        enabled: yes
+        state: started
+
+    - name: Configure Zammad to use Elasticsearch
+      command: zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+      environment:
+        RAILS_ENV: production
+
+    - name: Initialize Zammad search index
+      command: zammad run rake searchindex:rebuild
+      environment:
+        RAILS_ENV: production
