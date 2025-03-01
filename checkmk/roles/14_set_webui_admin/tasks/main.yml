@@ -18,6 +18,6 @@
     automation_secret: "{{ checkmk_automation_secret }}"  # Use extracted secret
     name: "cmkadmin"
     password: "{{ cmkadmin_password }}"
-    roles: ["admin"]
+#    roles: ["admin"]
     state: present
   no_log: true  # Hide sensitive data from logs
