@@ -14,5 +14,5 @@
     - 11_install_collection_checkmk.general
     - 12_install_checkmk
     - 13_create_site
-    - 14_set_webui_admin
+    #- 14_set_webui_admin
     #- 15_add_basic_clients
