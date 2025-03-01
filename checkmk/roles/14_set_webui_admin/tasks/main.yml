@@ -12,12 +12,12 @@
 
 - name: Set Checkmk admin password
   checkmk.general.user:
-    server_url: "{{ checkmk_server_url }}"
+    server_url: "192.168.1.245"
     site: "monitoring"
     automation_user: "automation"
     automation_secret: "{{ checkmk_automation_secret }}"  # Use extracted secret
     name: "cmkadmin"
-    password: "{{ cmkadmin_password }}"
-#    roles: ["admin"]
+    password: "Start123$"
+    roles: ["admin"]
     state: present
   no_log: true  # Hide sensitive data from logs
