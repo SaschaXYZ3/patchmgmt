@@ -1,2 +1,2 @@
 ---
-checkmk_server_admin_pass: "Start123$"
+cmkadmin_password: "Start123$"
