@@ -10,6 +10,7 @@
       alias: "Checkmk-Server"
       ipaddress: "192.168.1.245"
 #      description: "{{ item.description }}"
+    folder: "/"
     state: present
   #loop:
   #  - { name: "server", ipaddress: "192.168.1.245"}
