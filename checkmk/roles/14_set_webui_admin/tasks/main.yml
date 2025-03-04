@@ -3,6 +3,7 @@
   checkmk.general.user:
     server_url: "http://192.168.1.245"
     site: "monitoring"
+    auth_type: "automation"
     automation_user: "automation"
     automation_secret: "W5gevgvyOk4XGHZFuUzfGIL5"
     name: "cmkadmin"
