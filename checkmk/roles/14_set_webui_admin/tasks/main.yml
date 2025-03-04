@@ -7,7 +7,7 @@
     automation_secret: "W5gevgvyOk4XGHZFuUzfGIL5"
     auth_type: "password"
     name: "admincmk"
-    password: "Start123456$"
+    password: "Start123456789$"
 #    roles: ["admin"]
     state: present
 #  no_log: true
