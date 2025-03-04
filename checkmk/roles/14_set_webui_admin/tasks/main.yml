@@ -1,6 +1,6 @@
 ---
 - name: Set Checkmk admin password
-  checkmk.general.activation:
+  checkmk.general.user:
     server_url: "http://192.168.1.245"
     site: "monitoring"
     automation_user: "automation"
@@ -8,5 +8,5 @@
     name: "cmkadmin"
     password: "Start123$"
     roles: ["admin"]
-    state: present
+    state: reset_password
 #  no_log: true
