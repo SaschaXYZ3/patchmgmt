@@ -1,2 +1,2 @@
----
-cmkadmin_password: "Start123$"
+checkmk_server_url: "http://192.168.1.245"
+checkmk_automation_user: "automation"

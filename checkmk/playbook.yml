@@ -3,8 +3,8 @@
   hosts: localhost
   connection: local
   become: yes
-  vars_files:
-    - ./patchmgmt/checkmk/group_vars/site.yml
+#  vars_files:
+#    - ./patchmgmt/checkmk/group_vars/site.yml
   roles:
     #- 01_checkmk_download
     #- 02_checkmk_verify
@@ -13,6 +13,6 @@
     #- 05_checkmk_config
     #- 11_install_collection_checkmk.general
     #- 12_install_checkmk
-    #- 13_create_site
+    - 13_create_site
     - 14_set_webui_admin
     #- 15_add_basic_clients
