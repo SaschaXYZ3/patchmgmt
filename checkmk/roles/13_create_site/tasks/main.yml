@@ -16,6 +16,10 @@
   ansible.builtin.command: cat /omd/sites/monitoring/var/check_mk/web/automation/automation.secret
   register: checkmk_api_secret
 
+- name: Store automation secret as a fact
+  ansible.builtin.set_fact:
+    checkmk_automation_secret: "{{ checkmk_api_secret.stdout }}"
+
 #- name: Output
 #  ansible.builtin.debug:
 #    msg: "{{ checkmk_api_secret }}"
