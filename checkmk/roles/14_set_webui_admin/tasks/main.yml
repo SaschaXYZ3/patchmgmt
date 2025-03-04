@@ -5,7 +5,7 @@
     site: "monitoring"
     automation_user: "automation"
     automation_secret: "W5gevgvyOk4XGHZFuUzfGIL5"
-    name: "cmkadmin"
+    owner: "cmkadmin"
     password: "Start123$"
 #    roles: ["admin"]
     state: present
