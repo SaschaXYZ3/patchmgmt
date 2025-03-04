@@ -9,4 +9,4 @@
     password: "Start123$"
     roles: ["admin"]
     state: present
-  no_log: true
+#  no_log: true
