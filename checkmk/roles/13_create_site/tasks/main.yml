@@ -11,7 +11,3 @@
 - name: Save API-Key
   ansible.builtin.command: cat /opt/omd/sites/monitoring/var/check_mk/web/automation/automation.secret
   register: checkmk_api_secret
-
-- name: Store API automation_secret
-  ansible.builtin.set_fact:
-    checkmk_api_secret: "{{ checkmk_api_secret.stdout }}"
