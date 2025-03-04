@@ -7,10 +7,11 @@
     automation_secret: "{{ checkmk_api_secret.stdout }}"
     name: "{{ item.hostname }}"
     atributes:
-      ipaddress: "{{ item.ip }}"
+      alias: "Checkmk-Server"
+      ipaddress: "192.168.1.245"
 #      description: "{{ item.description }}"
     state: present
-  loop:
-    - { name: "server", ipaddress: "192.168.1.245"}
+  #loop:
+  #  - { name: "server", ipaddress: "192.168.1.245"}
    # - { hostname: "server2", ip: "192.168.1.11", description: "DB-Server" }
    # - { hostname: "server3", ip: "192.168.1.12", description: "Proxy-Server" }
