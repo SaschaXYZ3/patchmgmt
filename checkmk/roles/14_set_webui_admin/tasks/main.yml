@@ -7,6 +7,6 @@
     automation_secret: "W5gevgvyOk4XGHZFuUzfGIL5"
     name: "admincmk"
     password: "Start123$"
-    roles: ["admin"]
+#    roles: ["admin"]
     state: present
 #  no_log: true
