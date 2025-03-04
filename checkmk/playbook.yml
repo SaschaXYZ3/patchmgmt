@@ -11,8 +11,15 @@
     #- 03_checkmk_install
     #    - 04_checkmk_create_instance
     #- 05_checkmk_config
+    #
+    #TODO
+    #install requs:
+    #sudo apt install python3-pip
+    #ansible-galaxy collection install checkmk.general
+    #
+    #- 10_install_requirements
     #- 11_install_collection_checkmk.general
     #- 12_install_checkmk
     - 13_create_site
     - 14_set_webui_admin
-    #- 15_add_basic_clients
+    - 15_add_basic_clients

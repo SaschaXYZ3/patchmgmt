@@ -2,6 +2,8 @@
 - name: Add hosts to Checkmk
   checkmk.general.host:
     site: monitoring
+    automation_user: "automation"
+    automation_secret: "{{ checkmk_api_secret.stdout }}"
     hostname: "{{ item.hostname }}"
     ipaddress: "{{ item.ip }}"
     description: "{{ item.description }}"
