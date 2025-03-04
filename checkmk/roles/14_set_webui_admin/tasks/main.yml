@@ -4,7 +4,7 @@
     server_url: "http://192.168.1.245"
     site: "monitoring"
     automation_user: "automation"
-    automation_secret: "{{ checkmk_secret }}"
+    automation_secret: "{{ automation_secret }}"
     auth_type: "password"
     name: "cmkadmin"
     password: "{{ cmkadmin_password }}"
