@@ -7,7 +7,7 @@
 
 - name: Start Checkmk instance
   ansible.builtin.command: omd start monitoring
-  changed_when: false
+  ignore_errors: true
 
 #- name: Set API-Secret
 #  ansible.builtin.command: echo "{{ automation_secret }}" > /opt/omd/sites/monitoring/var/check_mk/web/automation/automation.secret
