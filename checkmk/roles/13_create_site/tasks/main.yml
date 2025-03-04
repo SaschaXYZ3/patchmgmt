@@ -8,6 +8,6 @@
 - name: Start Checkmk instance
   ansible.builtin.command: omd start monitoring
 
-- name: Save API-Key
-  ansible.builtin.command: cat /opt/omd/sites/monitoring/var/check_mk/web/automation/automation.secret
-  register: checkmk_api_secret
+- name: Set API-Secret
+  ansible.builtin.command: echo "{{ automation_secret }}" > /opt/omd/sites/monitoring/var/check_mk/web/automation/automation.secret
+  
