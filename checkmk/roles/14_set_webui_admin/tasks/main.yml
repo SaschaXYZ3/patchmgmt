@@ -9,5 +9,5 @@
     name: "cmkadmin"
     password: "Start123456789$"
 #    roles: ["admin"]
-    state: present
+    state: reset_password
 #  no_log: true
