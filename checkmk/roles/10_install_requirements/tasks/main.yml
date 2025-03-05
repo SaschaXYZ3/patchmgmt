@@ -1,0 +1,10 @@
+---
+- name: Install required dependencies
+  become: true
+  ansible.builtin.apt:
+    name: python3-pip
+    state: present
+    update_cache: true
+
+- name: Install Checkmk Ansible collection
+  ansible.builtin.command: ansible-galaxy collection install checkmk.general
