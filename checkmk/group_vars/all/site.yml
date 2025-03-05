@@ -1,6 +1,5 @@
 checkmk_server_url: "http://192.168.1.245"
 checkmk_automation_user: "automation"
 downloadlink: "https://download.checkmk.com/checkmk/2.3.0p27/check-mk-cloud-2.3.0p27_0.noble_amd64.deb"
-download_hash: "5c14d3689bde23bd4ef241744e54fb2674574d6b5ac1fb9fc40b87c8b6f09156"
 site_name: "monitoring"
 cmk_ip: "192.168.1.245"

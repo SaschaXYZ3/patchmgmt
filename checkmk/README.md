@@ -5,28 +5,31 @@ This Ansible project automates the installation of Checkmk, including downloadin
 ## Directory Structure
 
 ```
-ansible-checkmk/                # Main directory of the Ansible project
-|-- ansuble.cfg                 # Global Configuration to execute Ansible Playbooks
-│-- inventory                   # Inventory file for target hosts
-│-- playbook.yml                 # Main playbook (includes roles)
-│-- group_vars/
-│   │-- vault.yml               # Ansible Vault to store encrypted passwords
-│-- roles/                       # Folder for all roles
-│   │-- 01_checkmk_download/     # Role: Download Checkmk
+ansible-checkmk/              
+|-- ansible.cfg            
+│-- inventory               
+│-- playbook.yml           
+│-- group_vars/       
+│   │-- all/     
+│   │   ├── site.yml
+│   │   ├── vault.yml             
+│-- roles/                        
+│   │-- 10_install_requirements/  
 │   │   │-- tasks/
 │   │   │   ├── main.yml
-│   │-- 02_checkmk_verify/       # Role: Verify Checkmk SHA256
+│   │-- 11_install_collection_checkmk.general/       
 │   │   │-- tasks/
 │   │   │   ├── main.yml
-│   │-- 03_checkmk_install/      # Role: Install Checkmk
+│   │-- 12_install_checkmk/      
 │   │   │-- tasks/
 │   │   │   ├── main.yml
-│   │-- 04_checkmk_create_instance/ # Role: Create Checkmk instance
+│   │-- 13_create_site/
 │   │   │-- tasks/
 │   │   │   ├── main.yml
-|   |-- 05_checkmk_config/      # Role: Configure Checkmk
-|   |   │-- files/
-│   │   │   ├── checkmk-config.sh
+|   |-- 14_set_webui_admin/
+|   |   │-- tasks/
+│   │   │   ├── main.yml
+|   |-- 15_add_basic_clients/
 |   |   │-- tasks/
 │   │   │   ├── main.yml
 ```
@@ -40,77 +43,64 @@ ansible-checkmk/                # Main directory of the Ansible project
 ## Usage
 
 ### 1️ **Install Requirements**
+
 ```
-sudo apt install python3-pip
+sudo apt update && sudo apt upgrade -y
+sudo apt install git ansible python3-pip -y
 ansible-galaxy collection install checkmk.general
 ```
+### 2️ **Set variables for installation**
 
-### 2️ **Run the Playbook**
+Set all neccessary variables for the installation in ./checkmk/group_vars/all/site.yml
 
-Execute the playbook to install Checkmk:
+```sh
+checkmk_server_url: "http://192.168.1.245" # FQDN or IP of Checkmk Server, include http(s)://
+checkmk_automation_user: "automation"
+downloadlink: "https://download.checkmk.com/checkmk/2.3.0p27/check-mk-cloud-2.3.0p27_0.noble_amd64.deb" # actual downloadlink of the checkmk version you want to use
+download_hash: "5c14d3689bde23bd4ef241744e54fb2674574d6b5ac1fb9fc40b87c8b6f09156" # actual hash value from the download you want to use
+site_name: "monitoring" # the site name you monitoring instance should have
+cmk_ip: "192.168.1.245" # the ip of your monitoring server, to add itself for monitoring
+```
+How to create a vault entry?
+ 
+```sh
+ansible-vault encrypt_string 'SuperSicheresPasswort123!' --name cmkadmin_password
+New Vault password:
+Confirm New Vault password:
+Encryption successful
+```
+Save the encryption in vault file like __group_vars/all/vault.yml__
+
+### 3 **Run the Playbook**
+
+Execute the playbook in /patchmgmt/checkmk to install Checkmk:
 
 ```sh
 ansible-playbook -i inventory playbook.yml --ask-become-pass --ask-become-vault
 ```
 
-### Optional **configure Instance to Monitore Clients**
-
-delete # in **playbook.yml**
-
-```sh
-#    - 14_set_webui_admin
-```
-
-add server/clients in **roles/05*checkmk_config*/files/checkmk-config.sh** like
-
-```sh
-HOSTS=(
-  "ansible.fh.at 192.168.1.101 Ansible Server"
-  "checkmk.fh.at 192.168.1.102 Checkmk Server"
-  "zammad.fh.at 192.168.1.103 Zammad Server"
-  "jenkins.fh.at 192.168.1.104 Jenkins"
-  "splunk.fh.at 192.168.1.105 SIEM"
-  "dns.fh.at 192.168.1.106 DNS"
-  "dhcp.fh.at 192.168.1.107 DHCP"
-)
-```
-
-### 3️ **Start Checkmk Instance**
-
-After successful installation, start the instance with:
-
-```sh
-sudo omd start monitoring
-```
-
 ## Role Descriptions
 
-### **01_checkmk_download**
+### **10_install_requirements**
 
-- Downloads the Checkmk package:  
-  `wget https://download.checkmk.com/checkmk/2.3.0p27/check-mk-raw-2.3.0p27_0.noble_amd64.deb`
+- 
 
-### **02_checkmk_verify**
+### **11_install_collection_checkmk.general**
 
-- Verifies the integrity of the package using the SHA256 checksum:  
-  `e318c0c1d1c7b91fdc639d89a1a05d0820614a854dbc19aef7c6719e35a9905a`
+- 
 
-### **03_checkmk_install**
+### **12_install_checkmk**
 
-- Installs the package using `apt`
-- Verifies installation with `omd version`
+- 
 
-### **04_checkmk_create_instance**
+### **13_create_site**
 
-- Creates a new Checkmk monitoring instance using `omd create monitoring`
-- Displays a message on how to start the instance
+- 
 
-### **05_checkmk_config**
+### **14_set_webui_admin**
 
-- adds host to monitor in the checkmk configuration
+- 
 
-## Extensions
+### **15_add_basic_clients**
 
-- **Use variables:** Store SHA256, download URL, and instance name in `group_vars` or `host_vars`
-- **Centralized configuration:** Provide adjustable settings using an additional `config.yml`
-- **Backup & Restore:** Automatically back up the Checkmk instance before updates
+- 
