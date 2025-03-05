@@ -39,14 +39,10 @@ ansible-checkmk/                # Main directory of the Ansible project
 
 ## Usage
 
-### 1️ **Adjust Inventory**
-
-Modify the `inventory` file and add your target hosts:
-
+### 1️ **Install Requirements**
 ```
-[checkmk_servers]
-server1.example.com
-server2.example.com
+sudo apt install python3-pip
+ansible-galaxy collection install checkmk.general
 ```
 
 ### 2️ **Run the Playbook**
@@ -54,7 +50,7 @@ server2.example.com
 Execute the playbook to install Checkmk:
 
 ```sh
-ansible-playbook -i inventory playbook.yml
+ansible-playbook -i inventory playbook.yml --ask-become-pass --ask-become-vault
 ```
 
 ### Optional **configure Instance to Monitore Clients**
@@ -62,7 +58,7 @@ ansible-playbook -i inventory playbook.yml
 delete # in **playbook.yml**
 
 ```sh
-#    - 05_checkmk_config
+#    - 14_set_webui_admin
 ```
 
 add server/clients in **roles/05*checkmk_config*/files/checkmk-config.sh** like

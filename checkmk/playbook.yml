@@ -11,7 +11,7 @@
     #- 03_checkmk_install
     #- 04_checkmk_create_instance
     #- 05_checkmk_config
-    - 10_install_requirements
+    #- 10_install_requirements
     - 11_install_collection_checkmk.general
     - 12_install_checkmk
     - 13_create_site
