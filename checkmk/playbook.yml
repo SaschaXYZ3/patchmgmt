@@ -3,19 +3,9 @@
   hosts: localhost
   connection: local
   become: yes
-#  vars_files:
-#    - ./patchmgmt/checkmk/group_vars/site.yml
-  pre_tasks:
-    - name: Install Checkmk Ansible collection
-      ansible.builtin.command: ansible-galaxy collection install checkmk.general
 
   roles:
-    #- 01_checkmk_download
-    #- 02_checkmk_verify
-    #- 03_checkmk_install
-    #- 04_checkmk_create_instance
-    #- 05_checkmk_config
-    - 10_install_requirements
+    #- 10_install_requirements
     #- 11_install_collection_checkmk.general
     - 12_install_checkmk
     - 13_create_site
