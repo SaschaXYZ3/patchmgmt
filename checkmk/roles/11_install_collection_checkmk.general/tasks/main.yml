@@ -1,5 +1,4 @@
 ---
-pre_tasks:
-  - name: Ensure Checkmk Ansible Collection is installed
-    ansible.builtin.command: ansible-galaxy collection install checkmk.general
-    changed_when: false
+- name: Ensure Checkmk Ansible Collection is installed
+  ansible.builtin.command: ansible-galaxy collection install checkmk.general
+  changed_when: false
