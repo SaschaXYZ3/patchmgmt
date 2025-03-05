@@ -1,5 +1,5 @@
 ---
-- name: Install Checkmk with Verification
+- name: Install requirements
   hosts: localhost
   connection: local
   become: yes
@@ -7,7 +7,3 @@
   roles:
     - 10_install_requirements
     - 11_install_collection_checkmk.general
-    - 12_install_checkmk
-    - 13_create_site
-    - 14_set_webui_admin
-    - 15_add_basic_clients
