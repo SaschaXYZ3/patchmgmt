@@ -1,0 +1,3 @@
+---
+dependencies:
+  - role: 10_install_requirements

@@ -1,0 +1,3 @@
+---
+dependencies:
+  - role: 11_install_collection_checkmk.general
