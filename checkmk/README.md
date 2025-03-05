@@ -76,7 +76,7 @@ Save the encryption in vault file like __group_vars/all/vault.yml__
 Execute the playbook in /patchmgmt/checkmk to install Checkmk:
 
 ```sh
-ansible-playbook -i inventory playbook.yml --ask-become-pass --ask-become-vault
+ansible-playbook playbook.yml --ask-become-pass --ask-vault-pass
 ```
 
 ## Role Descriptions
