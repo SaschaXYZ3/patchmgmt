@@ -1,2 +1,5 @@
 checkmk_server_url: "http://192.168.1.245"
 checkmk_automation_user: "automation"
+downloadlink: "https://download.checkmk.com/checkmk/2.3.0p27/check-mk-raw-2.3.0p27_0.noble_amd64.deb"
+site_name: "monitoring"
+cmk_ip: "192.168.1.245"

@@ -1,14 +1,14 @@
 ---
 - name: Add hosts to Checkmk
   checkmk.general.host:
-    server_url: "http://192.168.1.245"
-    site: monitoring
+    server_url: "{{ checkmk_server_url }}"
+    site: "{{ site_name }}"
     automation_user: "automation"
     automation_secret: "{{ checkmk_api_secret.stdout }}"
     name: "cmkserver"
     attributes:
       alias: "Checkmk-Server"
-      ipaddress: "192.168.1.245"
+      ipaddress: "{{ cmk_ip }}"
 #      description: "{{ item.description }}"
     folder: "/"
     state: present
@@ -19,8 +19,8 @@
 
 - name: "Start activation on all sites."
   checkmk.general.activation:
-      server_url: "http://192.168.1.245"
-      site: monitoring
+      server_url: "{{ checkmk_server_url }}"
+      site: "{{ site_name }}"
       automation_user: "automation"
       automation_secret: "{{ checkmk_api_secret.stdout }}"
   run_once: 'true'

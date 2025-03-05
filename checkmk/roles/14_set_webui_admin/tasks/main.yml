@@ -1,8 +1,8 @@
 ---
 - name: Set Checkmk admin password
   checkmk.general.user:
-    server_url: "http://192.168.1.245"
-    site: "monitoring"
+    server_url: "{{ checkmk_server_url }}"
+    site: "{{ site_name }}"
     automation_user: "automation"
     automation_secret: "{{ checkmk_api_secret.stdout }}"
     auth_type: "password"
