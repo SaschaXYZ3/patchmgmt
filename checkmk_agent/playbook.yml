@@ -4,8 +4,8 @@
   become: yes
 
   vars:
-    deb_package: "./packages/check-mk-agent.deb"
-    rpm_package: "./packages/check-mk-agent.rpm"
+    deb_package: "./packages/check-mk-agent_2.3.0p27-0cbb2b095471caa1_all.deb"
+    rpm_package: "./packages/check-mk-agent-2.3.0p27-0cbb2b095471caa1.noarch.rpm"
 
   tasks:
     - name: Check OS Family
