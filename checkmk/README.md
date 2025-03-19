@@ -47,12 +47,9 @@ ansible-checkmk/
 ```sh
 sudo apt update && sudo apt upgrade -y
 sudo apt install git ansible python3-pip -y
-ansible-galaxy collection install checkmk.general
-```
-OR
-
-```sh
-ansible-playbook require.yml --ask-become-pass
+git clone ...
+cd patchmgmt/checkmk
+ansible-galaxy install -r collections/requirements.yml
 ```
 ### 2️ **Set variables for installation**
 

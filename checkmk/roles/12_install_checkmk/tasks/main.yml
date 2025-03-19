@@ -1,11 +1,11 @@
 ---
-- name: Install Checkmk
-  ansible.builtin.apt:
-    deb: "{{ downloadlink }}"
-  when: ansible_os_family == "Debian"
+- name: "Install Checkmk and create Sites."
+  ansible.builtin.import_role:
+    name: checkmk.general.server
 
-- name: Ensure Checkmk service is enabled
-  ansible.builtin.systemd:
-    name: apache2
-    enabled: true
-    state: started
+- name: "Activate Changes on all Sites."
+  checkmk.general.activation:
+    server_url: "{{ checkmk_var_server_url }}"
+    site: "{{ checkmk_var_site }}"
+    automation_user: "cmkadmin"
+    automation_secret: "{{ checkmk_server_admin_pass }}"
