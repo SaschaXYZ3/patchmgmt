@@ -81,6 +81,9 @@ Execute the playbook in /patchmgmt/checkmk to install Checkmk:
 ansible-playbook playbook.yml --ask-become-pass --ask-vault-pass
 ```
 
+
+After installing Checkmk you have to configure your dns in /etc/resolv.conf to your internal DNS-Server so that Checkmk can also use DNS for adding hosts.
+
 ## Role Descriptions
 
 ### **10_install_requirements**
