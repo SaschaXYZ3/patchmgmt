@@ -1,0 +1,9 @@
+---
+- name: Install requirements
+  hosts: localhost
+  connection: local
+  become: yes
+
+  roles:
+    - 10_install_requirements
+    - 11_install_collection_checkmk.general

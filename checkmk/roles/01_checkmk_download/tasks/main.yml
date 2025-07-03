@@ -1,5 +1,0 @@
----
-- name: Download Checkmk package
-  get_url:
-    url: "https://download.checkmk.com/checkmk/2.3.0p27/check-mk-raw-2.3.0p27_0.noble_amd64.deb"
-    dest: "/tmp/check-mk-raw-2.3.0p27_0.noble_amd64.deb"

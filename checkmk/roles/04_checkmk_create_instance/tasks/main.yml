@@ -1,9 +1,0 @@
----
-- name: Create Checkmk monitoring instance
-  command: "omd create monitoring"
-  args:
-    creates: "/omd/sites/monitoring"
-
-- name: Final message
-  debug:
-    msg: "Checkmk instance 'monitoring' created. Start it with: sudo omd start monitoring"

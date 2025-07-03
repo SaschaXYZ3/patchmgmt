@@ -1,0 +1,18 @@
+---
+- name: Create Checkmk instance
+  ansible.builtin.command: omd create {{ site_name }}
+  args:
+    creates: "/omd/sites/{{ site_name }}"
+  register: omd_create
+
+- name: Start Checkmk instance
+  ansible.builtin.command: omd start "{{ site_name }}"
+  ignore_errors: true
+
+- name: Extract Checkmk automation secret
+  ansible.builtin.command: cat /omd/sites/{{ site_name }}/var/check_mk/web/automation/automation.secret
+  register: checkmk_api_secret
+
+- name: Store automation secret as a fact
+  ansible.builtin.set_fact:
+    checkmk_automation_secret: "{{ checkmk_api_secret.stdout }}"

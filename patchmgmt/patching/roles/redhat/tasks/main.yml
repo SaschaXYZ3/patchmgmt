@@ -1,0 +1,17 @@
+---
+- name: Ensure dnf is installed if necessary (for older CentOS versions)
+  package:
+    name: dnf
+    state: present
+  when: ansible_distribution_major_version | int >= 8
+
+- name: Perform package update using dnf/yum
+  package:
+    name: "*"
+    state: latest
+
+- name: Remove unnecessary packages (only supported with dnf)
+  command: dnf autoremove -y
+  when: ansible_distribution_major_version | int >= 8
+  register: autoremove_result
+  changed_when: "'Nothing to do' not in autoremove_result.stdout"

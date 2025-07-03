@@ -1,0 +1,13 @@
+---
+checkmk_var_server_url: "http://checkmk.hartl.at"
+checkmk_var_site: "monitoring"
+
+checkmk_server_version: "2.3.0p27"
+checkmk_server_edition: "cce"
+checkmk_server_admin_pass: "Start123456789$"
+checkmk_server_sites:
+  - name: monitoring
+    version: "{{ checkmk_server_version }}"
+    state: started
+    admin_pw: "{{ checkmk_server_admin_pass }}"
+    update_conflict_resolution: install

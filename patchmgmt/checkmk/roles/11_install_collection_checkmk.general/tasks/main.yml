@@ -1,0 +1,5 @@
+---
+- name: Ensure Checkmk Ansible Collection is installed
+  ansible.builtin.command: ansible-galaxy collection install checkmk.general
+  args:
+    creates: ~/.ansible/collections/ansible_collections/checkmk/general
