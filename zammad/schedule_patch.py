@@ -13,13 +13,14 @@ HEADERS = {
 }
 
 def get_approved_tickets():
-    url = f"{ZAMMAD_URL}/api/v1/tickets/search"
-    params = {
-        "query": "state_id:4"
-    }
-    response = requests.get(url, headers=HEADERS, params=params)
+    url = f"{ZAMMAD_URL}/api/v1/tickets"
+    response = requests.get(url, headers=HEADERS)
     response.raise_for_status()
-    return response.json()
+    all_tickets = response.json()
+
+    # Filter nach state_id = 4
+    approved_tickets = [t for t in all_tickets if t.get("state_id") == 4]
+    return approved_tickets
 
 def extract_hostname_from_article(ticket):
     for article_id in ticket.get("article_ids", []):
@@ -27,27 +28,19 @@ def extract_hostname_from_article(ticket):
         r = requests.get(article_url, headers=HEADERS)
         if r.ok:
             content = r.json().get("body", "")
-            print(content)
             print(f"Ticket {ticket['id']} Artikel {article_id} Inhalt:\n{content}\n---")
-            for line in content:
-                #print(type(line))
-                #hostname = line['Host']
-                if "Host: " in line:
+            for line in content.splitlines():
+                if "Host:" in line:
                     hostname = line.split("Host:")[1].strip()
-                    print(hostname)
-
-           # .splitlines():
-           #     if line.startswith("Host: "):
-           #         line_split = line.split(":",1)
-           #         print(line_split)
-           #         return line_split[1].strip()
-                return hostname
+                    return hostname
     return None
 
 def schedule_ansible_patch(hostname, at_time):
-    # Ansible-Befehl mit Passwort-Variablen und -kK-Flags
     ansible_cmd = (
-        f"ansible-playbook -i /opt/patchmgmt/ansible/inventory /opt/patchmgmt/patching/patch.yml --vault-password-file /opt/patchmgmt/patching/.vault --limit {hostname}"
+        f"ansible-playbook -i /opt/patchmgmt/ansible/inventory "
+        f"/opt/patchmgmt/patching/patch.yml "
+        f"--vault-password-file /opt/patchmgmt/patching/.vault "
+        f"--limit {hostname}"
     )
 
     print(f"Scheduling command at {at_time}: {ansible_cmd}")
@@ -58,12 +51,13 @@ def schedule_ansible_patch(hostname, at_time):
         text=True,
         capture_output=True
     )
+
     print("stdout:", proc.stdout)
     print("stderr:", proc.stderr)
     print("returncode:", proc.returncode)
 
     if proc.returncode != 0:
-        raise RuntimeError(f"at command failed: {proc.stderr}")
+        raise RuntimeError(f"'at' command failed: {proc.stderr}")
 
 def schedule_patches():
     print("Fetching approved tickets...")
@@ -76,7 +70,7 @@ def schedule_patches():
             print(f"No hostname found in ticket {ticket['id']}")
             continue
 
-        pending_till = ticket.get("pending_till")
+        pending_till = ticket.get("pending_time")
         if pending_till:
             try:
                 dt = datetime.strptime(pending_till, "%Y-%m-%dT%H:%M:%SZ")
