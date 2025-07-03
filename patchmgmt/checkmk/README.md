@@ -5,22 +5,22 @@ This Ansible project automates the installation of Checkmk, including downloadin
 ## Directory Structure
 
 ```
-ansible-checkmk/              
-|-- ansible.cfg            
-│-- inventory               
-│-- playbook.yml           
-│-- group_vars/       
-│   │-- all/     
+ansible-checkmk/
+|-- ansible.cfg
+│-- inventory
+│-- playbook.yml
+│-- group_vars/
+│   │-- all/
 │   │   ├── site.yml
-│   │   ├── vault.yml             
-│-- roles/                        
-│   │-- 10_install_requirements/  
+│   │   ├── vault.yml
+│-- roles/
+│   │-- 10_install_requirements/
 │   │   │-- tasks/
 │   │   │   ├── main.yml
-│   │-- 11_install_collection_checkmk.general/       
+│   │-- 11_install_collection_checkmk.general/
 │   │   │-- tasks/
 │   │   │   ├── main.yml
-│   │-- 12_install_checkmk/      
+│   │-- 12_install_checkmk/
 │   │   │-- tasks/
 │   │   │   ├── main.yml
 │   │-- 13_create_site/
@@ -51,6 +51,7 @@ git clone ...
 cd patchmgmt/checkmk
 ansible-galaxy install -r collections/requirements.yml
 ```
+
 ### 2️ **Set variables for installation**
 
 Set all neccessary variables for the installation in ./checkmk/group_vars/all/site.yml
@@ -63,15 +64,17 @@ download_hash: "5c14d3689bde23bd4ef241744e54fb2674574d6b5ac1fb9fc40b87c8b6f09156
 site_name: "monitoring" # the site name you monitoring instance should have
 cmk_ip: "192.168.1.245" # the ip of your monitoring server, to add itself for monitoring
 ```
+
 How to create a vault entry?
- 
+
 ```sh
 ansible-vault encrypt_string 'SuperSicheresPasswort123!' --name cmkadmin_password
 New Vault password:
 Confirm New Vault password:
 Encryption successful
 ```
-Save the encryption in vault file like __group_vars/all/vault.yml__
+
+Save the encryption in vault file like **group_vars/all/vault.yml**
 
 ### 3 **Run the Playbook**
 
@@ -81,31 +84,4 @@ Execute the playbook in /patchmgmt/checkmk to install Checkmk:
 ansible-playbook playbook.yml --ask-become-pass --ask-vault-pass
 ```
 
-
 After installing Checkmk you have to configure your dns in /etc/resolv.conf to your internal DNS-Server so that Checkmk can also use DNS for adding hosts.
-
-## Role Descriptions
-
-### **10_install_requirements**
-
-- 
-
-### **11_install_collection_checkmk.general**
-
-- 
-
-### **12_install_checkmk**
-
-- 
-
-### **13_create_site**
-
-- 
-
-### **14_set_webui_admin**
-
-- 
-
-### **15_add_basic_clients**
-
-- 
