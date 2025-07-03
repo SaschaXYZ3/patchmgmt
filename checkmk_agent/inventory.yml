@@ -1,9 +1,0 @@
-[infra]
-gateway.hartl.at
-dhcp.hartl.at
-mail.hartl.at
-ansible.hartl.at
-
-[appl]
-checkmk.hartl.at
-zammad.hartl.at
