@@ -1,0 +1,5 @@
+[all]
+#Enter your hosts here e.g.
+#debian-host1.mydomain.com
+#debian-host2.mydomain.com
+#redhat-host1.mydomain.com

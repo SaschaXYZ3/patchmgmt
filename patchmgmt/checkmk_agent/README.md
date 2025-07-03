@@ -1,27 +1,30 @@
 # Install Checkmk Agent
 
-Nach dem Herunterladen dieses Git-Projekts musst du die Agents im Verzeichnis  
-`patchmgmt/checkmk_agent/packages` durch deine eigenen Agents ersetzen.  
+After downloading this Git project, you need to replace the agents in the directory
+`patchmgmt/checkmk_agent/packages` with your own Checkmk agents.
 
-Diese Agents werden verwendet, um Checkmk unter `/opt` zu installieren und die Plugins `yum` und `apt` bereitzustellen, die den Update-Status überwachen.
+These agents are used to install Checkmk under `/opt` and provide the `yum` and `apt` plugins to monitor the update status of your systems.
 
----
+## Adjust Configuration
 
-## Konfiguration anpassen
+### Change Remote User and SSH Key
 
-### Remote-User und SSH-Key ändern
-Falls erforderlich, ändere den Remote-User oder füge einen SSH-Key hinzu:
+If needed, update the remote user or add an SSH key in the following file:
+
 ```bash
 vi /patchmgmt/patchmgmt/checkmk_agent/ansible.cfg
 ```
 
-### Inventory anpassen
-Öffne die Datei und füge die gewünschten Hosts hinzu:
+### Edit the Inventory
+
+Open the inventory file and add your desired hosts:
+
 ```bash
-vi /patchmgmt/patchmgmt/checkmk_agent/inventory.yml
+vi /patchmgmt/patchmgmt/checkmk_agent/inventory
 ```
 
-**Beispiel-Inhalt für die Inventory-Datei:**
+**Example content of the inventory file:**
+
 ```ini
 [Hostgroup]
 host1.domain.com
@@ -29,8 +32,9 @@ host1.domain.com
 
 ---
 
-## Playbook ausführen
-Wenn du einen SSH-Key verwendest, kannst du die Option `-k` weglassen und stattdessen nur `-K` nutzen:
+## Run the Playbook
+
+If you're using an SSH key, you can omit the `-k` option and just use `-K`:
 
 ```bash
 ansible-playbook -i inventory.yml playbook.yml -K
@@ -38,8 +42,7 @@ ansible-playbook -i inventory.yml playbook.yml -K
 
 ---
 
-## Hinweise
-- `-k` → Passwortabfrage für den SSH-Login  
-- `-K` → Passwortabfrage für `sudo`  
+## Notes
 
-Falls du weitere Anpassungen oder Erklärungen benötigst, lass es mich wissen! 🚀
+- `-k` → Prompt for SSH password
+- `-K` → Prompt for `sudo` password
