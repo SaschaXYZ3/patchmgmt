@@ -4,8 +4,8 @@ import requests
 from datetime import datetime
 import subprocess
 
-ZAMMAD_URL = "http://zammad.nexus.fh-campuswien.ac.at"
-ZAMMAD_TOKEN = "MIGcBX5u3i4a60qp3tVaZw1Gu2t4k3wLtGHRxLvk2l33vL8YlsnvG6AmicvJRms_"
+ZAMMAD_URL = "<Enter your Zammad URL here>"
+ZAMMAD_TOKEN = "<Enter your Zammad API Token here>"
 
 HEADERS = {
     "Authorization": f"Token token={ZAMMAD_TOKEN}",
@@ -47,7 +47,7 @@ def extract_hostname_from_article(ticket):
 def schedule_ansible_patch(hostname, at_time):
     # Ansible-Befehl mit Passwort-Variablen und -kK-Flags
     ansible_cmd = (
-        f"ansible-playbook -i /opt/ansible/inventory /opt/ansible/patch.yml --vault-password-file /opt/ansible/.vault --limit {hostname}"
+        f"ansible-playbook -i /opt/patchmgmt/ansible/inventory /opt/patchmgmt/patching/patch.yml --vault-password-file /opt/patchmgmt/patching/.vault --limit {hostname}"
     )
 
     print(f"Scheduling command at {at_time}: {ansible_cmd}")
