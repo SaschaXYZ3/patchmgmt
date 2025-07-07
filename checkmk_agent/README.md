@@ -37,7 +37,7 @@ host1.domain.com
 If you're using an SSH key, you can omit the `-k` option and just use `-K`:
 
 ```bash
-ansible-playbook -i inventory.yml playbook.yml -K
+ansible-playbook -i inventory.yml playbook.yml -Kk
 ```
 
 ---

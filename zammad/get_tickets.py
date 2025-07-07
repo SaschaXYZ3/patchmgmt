@@ -15,9 +15,9 @@ def fetch_tickets():
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as e:
-        print(f"HTTP Fehler: {e}")
+        print(f"HTTP Error: {e}")
     except requests.exceptions.JSONDecodeError as e:
-        print(f"Antwort enthält kein gültiges JSON: {e}")
+        print(f"The response does not contain a valid JSON object: {e}")
     return []
 
 def print_ticket_info(tickets):

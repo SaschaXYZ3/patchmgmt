@@ -20,7 +20,7 @@ def get_approved_tickets():
 
     approved_tickets = []
     for t in all_tickets:
-        if t.get("state_id") == 4:  # closed überspringen
+        if t.get("state_id") == 4: 
             continue
         ticket_id = t["id"]
         detail_url = f"{ZAMMAD_URL}/api/v1/tickets/{ticket_id}"
@@ -80,30 +80,30 @@ def schedule_patches():
                 dt = datetime.strptime(pending_time, "%Y-%m-%dT%H:%M:%S.%fZ")
                 at_time = dt.strftime("%H:%M %Y-%m-%d")
             except Exception as e:
-                print(f"[ERROR] Ungültiges pending_time Format in Ticket {ticket['id']}: {pending_time} - {e}")
+                print(f"[ERROR] Invalid pending_time Format in Ticket {ticket['id']}: {pending_time} - {e}")
                 at_time = "now + 2 minutes"
         else:
-            print(f"[WARN] Kein pending_time in Ticket {ticket['id']}, setze Standardzeit")
+            print(f"[WARN] No pending_time in Ticket {ticket['id']}, set default time")
             at_time = "now + 2 minutes"
         schedule_run_patch(ticket['id'], hostname, at_time)
 
 def is_job_already_scheduled(ticket_id, hostname):
-    # Alle at-Jobs holen (nur die IDs)
+    
     proc = subprocess.run(["atq"], capture_output=True, text=True)
     if proc.returncode != 0:
-        print("[WARN] atq konnte nicht ausgeführt werden")
+        print("[WARN] atq command failed, assuming no jobs scheduled")
         return False
 
     jobs = proc.stdout.strip().splitlines()
     for line in jobs:
-        # Job ID ist das erste Wort in der Zeile
+        
         job_id = line.split()[0]
-        # Job-Skript auslesen
+        
         proc2 = subprocess.run(["at", "-c", job_id], capture_output=True, text=True)
         if proc2.returncode != 0:
             continue
         script = proc2.stdout
-        # Prüfen, ob unser Befehl darin vorkommt
+        
         if f"run_patch.py {ticket_id} {hostname}" in script:
             print(f"[INFO] Job für Ticket {ticket_id} und Host {hostname} bereits geplant (JobID {job_id})")
             return True
